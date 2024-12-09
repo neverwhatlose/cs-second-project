@@ -8,9 +8,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="File\Input\" />
       <Folder Include="File\Output\" />
-      <Folder Include="Task\Additional\" />
+      <Folder Include="Tasks\Additional\" />
     </ItemGroup>
 
 </Project>

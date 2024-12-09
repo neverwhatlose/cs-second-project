@@ -19,6 +19,7 @@
       "packagesPath": "/Users/mac/.nuget/packages/",
       "outputPath": "/Users/mac/projects/c sharp projects/Project2_1/Project2_1/obj/",
       "projectStyle": "PackageReference",
+      "UsingMicrosoftNETSdk": false,
       "configFilePaths": [
         "/Users/mac/.nuget/NuGet/NuGet.Config"
       ],

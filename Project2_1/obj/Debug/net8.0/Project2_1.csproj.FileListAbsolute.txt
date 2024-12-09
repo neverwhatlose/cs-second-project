@@ -1,0 +1,30 @@
+/Users/mac/projects/c sharp projects/Project2_1/Project2_1/bin/Debug/net8.0/Project2_1
+/Users/mac/projects/c sharp projects/Project2_1/Project2_1/bin/Debug/net8.0/Project2_1.deps.json
+/Users/mac/projects/c sharp projects/Project2_1/Project2_1/bin/Debug/net8.0/Project2_1.runtimeconfig.json
+/Users/mac/projects/c sharp projects/Project2_1/Project2_1/bin/Debug/net8.0/Project2_1.dll
+/Users/mac/projects/c sharp projects/Project2_1/Project2_1/bin/Debug/net8.0/Project2_1.pdb
+/Users/mac/projects/c sharp projects/Project2_1/Project2_1/obj/Debug/net8.0/Project2_1.GeneratedMSBuildEditorConfig.editorconfig
+/Users/mac/projects/c sharp projects/Project2_1/Project2_1/obj/Debug/net8.0/Project2_1.AssemblyInfoInputs.cache
+/Users/mac/projects/c sharp projects/Project2_1/Project2_1/obj/Debug/net8.0/Project2_1.AssemblyInfo.cs
+/Users/mac/projects/c sharp projects/Project2_1/Project2_1/obj/Debug/net8.0/Project2_1.csproj.CoreCompileInputs.cache
+/Users/mac/projects/c sharp projects/Project2_1/Project2_1/obj/Debug/net8.0/Project2_1.sourcelink.json
+/Users/mac/projects/c sharp projects/Project2_1/Project2_1/obj/Debug/net8.0/Project2_1.dll
+/Users/mac/projects/c sharp projects/Project2_1/Project2_1/obj/Debug/net8.0/refint/Project2_1.dll
+/Users/mac/projects/c sharp projects/Project2_1/Project2_1/obj/Debug/net8.0/Project2_1.pdb
+/Users/mac/projects/c sharp projects/Project2_1/Project2_1/obj/Debug/net8.0/Project2_1.genruntimeconfig.cache
+/Users/mac/projects/c sharp projects/Project2_1/Project2_1/obj/Debug/net8.0/ref/Project2_1.dll
+/Users/mac/projects/csharp_projects/Project2_1/Project2_1/bin/Debug/net8.0/Project2_1
+/Users/mac/projects/csharp_projects/Project2_1/Project2_1/bin/Debug/net8.0/Project2_1.deps.json
+/Users/mac/projects/csharp_projects/Project2_1/Project2_1/bin/Debug/net8.0/Project2_1.runtimeconfig.json
+/Users/mac/projects/csharp_projects/Project2_1/Project2_1/bin/Debug/net8.0/Project2_1.dll
+/Users/mac/projects/csharp_projects/Project2_1/Project2_1/bin/Debug/net8.0/Project2_1.pdb
+/Users/mac/projects/csharp_projects/Project2_1/Project2_1/obj/Debug/net8.0/Project2_1.GeneratedMSBuildEditorConfig.editorconfig
+/Users/mac/projects/csharp_projects/Project2_1/Project2_1/obj/Debug/net8.0/Project2_1.AssemblyInfoInputs.cache
+/Users/mac/projects/csharp_projects/Project2_1/Project2_1/obj/Debug/net8.0/Project2_1.AssemblyInfo.cs
+/Users/mac/projects/csharp_projects/Project2_1/Project2_1/obj/Debug/net8.0/Project2_1.csproj.CoreCompileInputs.cache
+/Users/mac/projects/csharp_projects/Project2_1/Project2_1/obj/Debug/net8.0/Project2_1.sourcelink.json
+/Users/mac/projects/csharp_projects/Project2_1/Project2_1/obj/Debug/net8.0/Project2_1.dll
+/Users/mac/projects/csharp_projects/Project2_1/Project2_1/obj/Debug/net8.0/refint/Project2_1.dll
+/Users/mac/projects/csharp_projects/Project2_1/Project2_1/obj/Debug/net8.0/Project2_1.pdb
+/Users/mac/projects/csharp_projects/Project2_1/Project2_1/obj/Debug/net8.0/Project2_1.genruntimeconfig.cache
+/Users/mac/projects/csharp_projects/Project2_1/Project2_1/obj/Debug/net8.0/ref/Project2_1.dll
