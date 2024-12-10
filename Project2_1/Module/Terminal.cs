@@ -6,7 +6,7 @@ namespace Project2_1.Module;
 
 public class Terminal
 {
-    private static readonly Tasks.Task[] TaskList = [new SetFilePath(), new WeatherInSydney(), new ShowStatistics(), new ProlongedSunshine(), new Terminate()];
+    private static readonly Tasks.Task[] TaskList = [new SetFilePath(), new WeatherInSydney(), new ShowStatistics(), new ProlongedSunshine(), new SortedByRainfall(), new Terminate()];
     private int _currentTask = -1;
 
     public Terminal SetTask(TaskListName taskName)

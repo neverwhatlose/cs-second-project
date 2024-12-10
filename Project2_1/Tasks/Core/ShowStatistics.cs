@@ -10,17 +10,18 @@ public class ShowStatistics(string name, string description, string prompt) : Ta
 
     public override void Execute(ref bool successfulExecution, ref string result)
     {
-        Console.WriteLine("Формирование сводной статистики...");
-        
         string[]? data = FileParser.ReadLines();
         if (data is not null)
         {
             try
             {
+                List<WeatherRec> weatherRecs = DataParser.ParseData(data);
+                
+                Console.WriteLine("Формирование сводной статистики...");
+                
                 int fishingDays = 0, rainyWarmDays = 0, normalAtmospherePressure = 0, WinDirCount = 0;
                 Dictionary<string, int> groups = new Dictionary<string, int>();
                 
-                List<WeatherRec> weatherRecs = DataParser.ParseData(data);
                 foreach (WeatherRec weatherRec in weatherRecs)
                 {
                     if (weatherRec.WindSpeed3Pm < 13)

@@ -10,16 +10,17 @@ public class ProlongedSunshine(string name, string description, string prompt) :
     
     public override void Execute(ref bool successfulExecution, ref string result)
     {
-        Console.WriteLine("Подсчет дней с продолжительным солнечным светом...\n" +
-        "Куда сохранить результат? (введите полный путь к файлу или нажмите Enter для сохранения в " +
-        $"{FileParser.GetProjectDirectory()}{Path.DirectorySeparatorChar}File{Path.DirectorySeparatorChar}Output{Path.DirectorySeparatorChar}Sunshine_days.csv)");
-        
         string[]? data = FileParser.ReadLines();
+        
         if (data is not null)
         {
             try
             {
                 List<WeatherRec> weatherRecs = DataParser.ParseData(data);
+                
+                Console.WriteLine("Подсчет дней с продолжительным солнечным светом...\n" +
+                                  "Куда сохранить результат? (введите полный путь к файлу или нажмите Enter для сохранения в " +
+                                  $"{FileParser.GetProjectDirectory()}{Path.DirectorySeparatorChar}File{Path.DirectorySeparatorChar}Output{Path.DirectorySeparatorChar}sunshine_days.csv)");
                 
                 WeatherRec longestSunshine = weatherRecs[0];
                 List<string> sunshineDays = new();
@@ -46,7 +47,7 @@ public class ProlongedSunshine(string name, string description, string prompt) :
                 {
                     if (outputDir is null || outputDir == "")
                     {
-                        outputDir = $"{FileParser.GetProjectDirectory()}{Path.DirectorySeparatorChar}File{Path.DirectorySeparatorChar}Output{Path.DirectorySeparatorChar}Sunshine_days.csv";
+                        outputDir = $"{FileParser.GetProjectDirectory()}{Path.DirectorySeparatorChar}File{Path.DirectorySeparatorChar}Output{Path.DirectorySeparatorChar}sunshine_days.csv";
                     }
                     result +=  $"Результат записан в файл {outputDir}";
                     

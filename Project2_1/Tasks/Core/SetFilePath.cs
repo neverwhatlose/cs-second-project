@@ -14,7 +14,7 @@ public class SetFilePath(string name, string description, string prompt) : Task(
         if (string.IsNullOrEmpty(input))
         {
             Console.WriteLine("Чтение входного файла...");
-            // парсим дефолтный путь
+            
             if (FileParser.IsDefaultPathValid())
             {
                 FileParser.SetNewFilePath(FileParser.DefaultInputPath, ref result, ref successfulExecution);

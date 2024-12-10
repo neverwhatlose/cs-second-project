@@ -10,14 +10,14 @@ public class WeatherInSydney(string name, string description, string prompt) : T
 
     public override void Execute(ref bool successfulExecution, ref string result)
     {
-        Console.WriteLine("Получение данных о погоде в Сиднее...\n");
-        
         string[]? data = FileParser.ReadLines();
         if (data is not null)
         {
             try
             {
                 List<WeatherRec> weatherRecs = DataParser.ParseData(data);
+                
+                Console.WriteLine("Получение данных о погоде в Сиднее...\n");
                 
                 List<string> weatherRecsStr = new();
                 weatherRecsStr.Add("Date,Location,MinTemp,MaxTemp,Rainfall,Evaporation,Sunshine,WindGustDir,WindGustSpeed,WindDir9am,WindDir3pm,WindSpeed9am,WindSpeed3pm,Humidity9am,Humidity3pm,Pressure9am,Pressure3pm,Cloud9am,Cloud3pm,Temp9am,Temp3pm,RainToday,RainTomorrow");
