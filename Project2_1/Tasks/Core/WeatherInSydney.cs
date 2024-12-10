@@ -10,7 +10,7 @@ public class WeatherInSydney(string name, string description, string prompt) : T
 
     public override void Execute(ref bool successfulExecution, ref string result)
     {
-        Console.WriteLine("Получение данных о погоде в Сиднее...");
+        Console.WriteLine("Получение данных о погоде в Сиднее...\n");
         
         string[]? data = FileParser.ReadLines();
         if (data is not null)
@@ -18,13 +18,27 @@ public class WeatherInSydney(string name, string description, string prompt) : T
             try
             {
                 List<WeatherRec> weatherRecs = DataParser.ParseData(data);
-                result = weatherRecs.Count.ToString();
-                successfulExecution = true;
+                
+                List<string> weatherRecsStr = new();
+                weatherRecsStr.Add("Date,Location,MinTemp,MaxTemp,Rainfall,Evaporation,Sunshine,WindGustDir,WindGustSpeed,WindDir9am,WindDir3pm,WindSpeed9am,WindSpeed3pm,Humidity9am,Humidity3pm,Pressure9am,Pressure3pm,Cloud9am,Cloud3pm,Temp9am,Temp3pm,RainToday,RainTomorrow");
+                foreach (WeatherRec weatherRec in weatherRecs)
+                {
+                    if (weatherRec.Location == "Sydney" &&
+                        (weatherRec.Date.Year == 2009 || weatherRec.Date.Year == 2010))
+                    {
+                        weatherRecsStr.Add(weatherRec.ToString());
+                    }
+                }
+                
+                string outputDir = $"{FileParser.GetProjectDirectory()}{Path.DirectorySeparatorChar}File{Path.DirectorySeparatorChar}Output{Path.DirectorySeparatorChar}Sydney_2009_2010_weatherAUS.csv";
+                FileParser.WriteToFile(outputDir, weatherRecsStr, ref successfulExecution);
+                
+                result = $"Найдено {weatherRecsStr.Count - 1} записей о погоде в Сиднее за 2009 и 2010 годы. " +
+                         $"Результат записан в файл {outputDir}";
             }
             catch (Exception ex)
             {
                 result = ex.Message;
-                successfulExecution = false;
             }
         }
         else

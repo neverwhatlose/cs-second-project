@@ -17,5 +17,6 @@ public enum WorldSides
     S,
     SSE,
     SE,
-    ESE
+    ESE,
+    NA   // for missing data
 }

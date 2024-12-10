@@ -1,5 +1,3 @@
-using System.Runtime.Serialization;
-
 namespace Project2_1.Module;
 
 public static class DataParser
@@ -36,30 +34,28 @@ public static class DataParser
         string[] values = line.Replace("No", "false").Replace("Yes", "true").Split(',');
         if (values.Length == ColumnCount)
         {
-            if (!values.Contains("NA")
-                && !values.Contains("\t")
-                && DateTime.TryParse(values[0], out DateTime time)
-                && double.TryParse(values[2], out double minTemp)
-                && double.TryParse(values[3], out double maxTemp)
-                && double.TryParse(values[4], out double rainfall)
-                && double.TryParse(values[5], out double evaporation)
-                && double.TryParse(values[6], out double sunshine)
+            if (DateTime.TryParse(values[0], out DateTime time)
+                && values[2].TryParseWithExtension(out double minTemp)
+                && values[3].TryParseWithExtension(out double maxTemp)
+                && values[4].TryParseWithExtension(out double rainfall)
+                && values[5].TryParseWithExtension(out double evaporation)
+                && values[6].TryParseWithExtension(out double sunshine)
                 && Enum.TryParse(values[7], out WorldSides windGustDir)
-                && int.TryParse(values[8], out int windGustSpeed)
+                && values[8].TryParseWithExtension(out int windGustSpeed)
                 && Enum.TryParse(values[9], out WorldSides windDir9Am)
                 && Enum.TryParse(values[10], out WorldSides windDir3Pm)
-                && int.TryParse(values[11], out int windSpeed9Am)
-                && int.TryParse(values[12], out int windSpeed3Pm)
-                && int.TryParse(values[13], out int humidity9Am)
-                && int.TryParse(values[14], out int humidity3Pm)
-                && double.TryParse(values[15], out double pressure9Am)
-                && double.TryParse(values[16], out double pressure3Pm)
-                && int.TryParse(values[17], out int cloud9Am)
-                && int.TryParse(values[18], out int cloud3Pm)
-                && double.TryParse(values[19], out double temp9Am)
-                && double.TryParse(values[20], out double temp3Pm)
-                && bool.TryParse(values[21], out bool rainToday)
-                && bool.TryParse(values[22], out bool rainTomorrow))
+                && values[11].TryParseWithExtension(out int windSpeed9Am)
+                && values[12].TryParseWithExtension(out int windSpeed3Pm)
+                && values[13].TryParseWithExtension(out int humidity9Am)
+                && values[14].TryParseWithExtension(out int humidity3Pm)
+                && values[15].TryParseWithExtension(out double pressure9Am)
+                && values[16].TryParseWithExtension(out double pressure3Pm)
+                && values[17].TryParseWithExtension(out int cloud9Am)
+                && values[18].TryParseWithExtension(out int cloud3Pm)
+                && values[19].TryParseWithExtension(out double temp9Am)
+                && values[20].TryParseWithExtension(out double temp3Pm)
+                && values[21].TryParseWithExtension(out bool rainToday)
+                && values[22].TryParseWithExtension(out bool rainTomorrow))
             {
                 weatherRec = new WeatherRec(time, values[1], minTemp, maxTemp, rainfall, evaporation, sunshine,
                     windGustDir, windGustSpeed, windDir9Am, windDir3Pm, windSpeed9Am, windSpeed3Pm, humidity9Am,
@@ -71,5 +67,38 @@ public static class DataParser
 
         weatherRec = new();
         return false;
+    }
+    
+    private static bool TryParseWithExtension(this string value, out bool result)
+    {
+        if (!value.Equals("NA"))
+        {
+            return bool.TryParse(value, out result);
+        }
+
+        result = false;
+        return true;
+    }
+    
+    private static bool TryParseWithExtension(this string value, out double result)
+    {
+        if (!value.Equals("NA"))
+        {
+            return double.TryParse(value, out result);
+        }
+
+        result = 0;
+        return true;
+    }
+    
+    private static bool TryParseWithExtension(this string value, out int result)
+    {
+        if (!value.Equals("NA"))
+        {
+            return int.TryParse(value, out result);
+        }
+
+        result = 0;
+        return true;
     }
 }

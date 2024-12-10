@@ -1,11 +1,12 @@
 using Project2_1.Tasks;
+using Project2_1.Tasks.Additional;
 using Project2_1.Tasks.Core;
 
 namespace Project2_1.Module;
 
 public class Terminal
 {
-    private static readonly Tasks.Task[] TaskList = [new SetFilePath(), new WeatherInSydney()];
+    private static readonly Tasks.Task[] TaskList = [new SetFilePath(), new WeatherInSydney(), new ShowStatistics(), new ProlongedSunshine(), new Terminate()];
     private int _currentTask = -1;
 
     public Terminal SetTask(TaskListName taskName)

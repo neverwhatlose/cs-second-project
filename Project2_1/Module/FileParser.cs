@@ -60,19 +60,21 @@ public static class FileParser
         }
     }
     
-    public static void WriteLines(string path, List<string> content)
+    public static void WriteToFile(string path, List<string> content, ref bool successfulExecution)
     {
         try
         {
             File.WriteAllLines(path, content, Encoding.UTF8);
+            successfulExecution = true;
         }
         catch (Exception ex) when (ex is IOException or SecurityException or UnauthorizedAccessException)
         {
+            successfulExecution = false;
             throw new Exception("Возникла ошибка при записи в файл: " + ex.Message);
         }
     }
     
-    private static string GetProjectDirectory()
+    public static string GetProjectDirectory()
     {
         return string.Join(" ", Directory.GetCurrentDirectory().Replace(" ",
                     "РАЗДЕЛИТЕЛЬ,ИСПОЛЬЗУЕМЫЙ_ДЛЯ_КОРРЕКТНОГО_ПОИСКА_ФАЙЛА_ДАЖЕ_С_УЧЕТОМ_ПРОБЕЛОВ_В_НАЗВАНИИ_ПАПКИ")

@@ -6,7 +6,7 @@ namespace Project2_1;
 
 public class MainClass
 {
-    public static void Main(string[] args)
+    public static void Main()
     {
         CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
         CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.InvariantCulture;
@@ -26,6 +26,8 @@ public class MainClass
             string? input = Console.ReadLine();
             if (int.TryParse(input, out int number))
             {
+                Console.Clear();
+                
                 terminal.SetTask((TaskListName)number).Execute();
                 
                 Console.WriteLine("Нажмите Enter, чтобы продолжить");
