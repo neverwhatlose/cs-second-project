@@ -11,8 +11,8 @@ public static class FileParser
     // Путь к файлу по умолчанию
     public static readonly string DefaultInputPath = GetProjectDirectory() + $"{Path.DirectorySeparatorChar}File{Path.DirectorySeparatorChar}Input{Path.DirectorySeparatorChar}weatherAUS.csv";
     // Путь к файлу, который указал пользователь
-    public static string customInputPath { get; private set; } = DefaultInputPath;
-    
+    public static string CustomInputPath { get; private set; } = DefaultInputPath;
+
     /// <summary>
     /// Устанавливает новый путь к файлу
     /// </summary>
@@ -30,13 +30,13 @@ public static class FileParser
 
             if (path == DefaultInputPath)
             {
-                customInputPath = DefaultInputPath;
+                CustomInputPath = DefaultInputPath;
                 result = "Данные успешно прочитаны!";
                 successfulExecution = true;
             }
             if (file is not null)
             {
-                customInputPath = path;
+                CustomInputPath = path;
                 result = $"Путь успешно изменен на: {path}";
                 successfulExecution = true;
             }
@@ -52,7 +52,8 @@ public static class FileParser
             successfulExecution = false;
         }
     }
-    
+
+    // Я не знаю, почему код стайл ругается на этот метод, но он нужен чисто для этого))
     /// <summary>
     /// Проверяет наличие файла в директории по умолчанию
     /// </summary>
@@ -61,7 +62,7 @@ public static class FileParser
     {
         return File.Exists(DefaultInputPath);
     }
-    
+
     /// <summary>
     /// Читает все строки из файла
     /// </summary>
@@ -70,7 +71,7 @@ public static class FileParser
     {
         try
         {
-            return File.ReadAllLines(customInputPath, Encoding.UTF8);
+            return File.ReadAllLines(CustomInputPath, Encoding.UTF8);
         }
         catch (Exception ex) when (ex is IOException or SecurityException or UnauthorizedAccessException)
         {
@@ -78,7 +79,7 @@ public static class FileParser
             return null;
         }
     }
-    
+
     /// <summary>
     /// Записывает строки в файл
     /// </summary>
@@ -99,7 +100,8 @@ public static class FileParser
             throw new Exception("Возникла ошибка при записи в файл: " + ex.Message);
         }
     }
-    
+
+    // Я не знаю, почему код стайл ругается на этот метод, но он нужен чисто для этого))
     /// <summary>
     /// Возвращает путь к директории проекта
     /// </summary>
@@ -109,7 +111,7 @@ public static class FileParser
         return string.Join(" ", Directory.GetCurrentDirectory().Replace(" ",
                     "РАЗДЕЛИТЕЛЬ,ИСПОЛЬЗУЕМЫЙ_ДЛЯ_КОРРЕКТНОГО_ПОИСКА_ФАЙЛА_ДАЖЕ_С_УЧЕТОМ_ПРОБЕЛОВ_В_НАЗВАНИИ_ПАПКИ")
                 .Split(Path.DirectorySeparatorChar)[..^3])
-            .Replace(" ", Path.DirectorySeparatorChar.ToString()).Replace(
+                .Replace(" ", Path.DirectorySeparatorChar.ToString()).Replace(
                 "РАЗДЕЛИТЕЛЬ,ИСПОЛЬЗУЕМЫЙ_ДЛЯ_КОРРЕКТНОГО_ПОИСКА_ФАЙЛА_ДАЖЕ_С_УЧЕТОМ_ПРОБЕЛОВ_В_НАЗВАНИИ_ПАПКИ", " ");
     }
 }

@@ -13,10 +13,10 @@ public class ProlongedSunshine(string name, string description, string prompt) :
     /// <summary>
     /// Основной конструктор задачи
     /// </summary>
-    public ProlongedSunshine() : this("ProlongedSunshine", 
-        "Показать дни с продолжительным солнечным светом", 
+    public ProlongedSunshine() : this("ProlongedSunshine",
+        "Показать дни с продолжительным солнечным светом",
         "Нажмите Enter для продолжения") { }
-    
+
     /// <summary>
     /// Переопределенный метод выполнения задачи
     /// </summary>
@@ -25,25 +25,25 @@ public class ProlongedSunshine(string name, string description, string prompt) :
     public override void Execute(ref bool successfulExecution, ref string result)
     {
         string[]? data = FileParser.ReadLines();
-        
+
         if (data is not null)
         {
             try
             {
                 // Парсинг данных
-                List<WeatherRec> weatherRecs = DataParser.ParseData(data);
-                
+                var weatherRecs = DataParser.ParseData(data);
+
                 Console.WriteLine("Подсчет дней с продолжительным солнечным светом...\n" +
                                   "Куда сохранить результат? (введите полный путь к файлу или нажмите Enter для сохранения в " +
                                   $"{FileParser.GetProjectDirectory()}{Path.DirectorySeparatorChar}File{Path.DirectorySeparatorChar}Output{Path.DirectorySeparatorChar}sunshine_days.csv)");
-                
-                WeatherRec longestSunshine = weatherRecs[0];
+
+                var longestSunshine = weatherRecs[0];
                 List<string> sunshineDays = new();
-                
+
                 sunshineDays.Add("Date,Location,MinTemp,MaxTemp,Rainfall,Evaporation,Sunshine,WindGustDir,WindGustSpeed,WindDir9am,WindDir3pm,WindSpeed9am,WindSpeed3pm,Humidity9am,Humidity3pm,Pressure9am,Pressure3pm,Cloud9am,Cloud3pm,Temp9am,Temp3pm,RainToday,RainTomorrow");
-               
+
                 // Подсчет дней с продолжительным солнечным светом
-                foreach (WeatherRec weatherRec in weatherRecs)
+                foreach (var weatherRec in weatherRecs)
                 {
                     if (weatherRec.Sunshine >= 4)
                     {
@@ -59,7 +59,7 @@ public class ProlongedSunshine(string name, string description, string prompt) :
                 result =
                     $"Самый длинный период солнечного света: {longestSunshine.MaxTemp} был {longestSunshine.Date.ToShortDateString()}.\n" +
                     $"Всего найдено {sunshineDays.Count} дней с продолжительным солнечным светом. ";
-                
+
                 // Запись результата в файл по директории, указанной пользователем
                 string? outputDir = Console.ReadLine();
                 try
@@ -69,13 +69,13 @@ public class ProlongedSunshine(string name, string description, string prompt) :
                         outputDir = $"{FileParser.GetProjectDirectory()}{Path.DirectorySeparatorChar}File{Path.DirectorySeparatorChar}Output{Path.DirectorySeparatorChar}sunshine_days.csv";
                     }
                     result +=  $"Результат записан в файл {outputDir}";
-                    
+
                     FileParser.WriteToFile(outputDir, sunshineDays, ref successfulExecution );
                 }
                 catch (Exception ex)
                 {
                    result = ex.Message;
-                } 
+                }
 
                 successfulExecution = true;
             }

@@ -9,7 +9,7 @@ public static class DataParser
 
     private const string ColumnNames =
         "Date,Location,MinTemp,MaxTemp,Rainfall,Evaporation,Sunshine,WindGustDir,WindGustSpeed,WindDir9am,WindDir3pm,WindSpeed9am,WindSpeed3pm,Humidity9am,Humidity3pm,Pressure9am,Pressure3pm,Cloud9am,Cloud3pm,Temp9am,Temp3pm,RainToday,RainTomorrow";
-    
+
     /// <summary>
     /// Парсит данные из массива строк
     /// </summary>
@@ -22,16 +22,16 @@ public static class DataParser
         {
             throw new Exception("Неверный формат данных");
         }
-        
+
         // Удаляем первую строку с названиями столбцов
         lines = lines[1..];
 
         List<WeatherRec> weatherRecs = new();
-        
+
         // Парсим каждую строку
         foreach (string line in lines)
         {
-            if (IsLineValid(line, out WeatherRec weatherRec))
+            if (IsLineValid(line, out var weatherRec))
             {
                 weatherRecs.Add(weatherRec);
             }
@@ -39,7 +39,7 @@ public static class DataParser
 
         return weatherRecs;
     }
-    
+
     /// <summary>
     /// Парсит строку к объекту WeatherRec
     /// </summary>
@@ -51,7 +51,7 @@ public static class DataParser
         string[] values = line.Replace("No", "false").Replace("Yes", "true").Split(',');
         if (values.Length == ColumnCount)
         {
-            if (DateTime.TryParse(values[0], out DateTime time)
+            if (DateTime.TryParse(values[0], out var time)
                 && values[2].TryParseWithExtension(out double minTemp)
                 && values[3].TryParseWithExtension(out double maxTemp)
                 && values[4].TryParseWithExtension(out double rainfall)
@@ -85,7 +85,7 @@ public static class DataParser
         weatherRec = new();
         return false;
     }
-    
+
     /// <summary>
     /// Расширение для TryParse
     /// </summary>
@@ -102,7 +102,7 @@ public static class DataParser
         result = false;
         return true;
     }
-    
+
     /// <summary>
     /// Расширение для TryParse
     /// </summary>
@@ -119,7 +119,7 @@ public static class DataParser
         result = 0;
         return true;
     }
-    
+
     /// <summary>
     /// Расширение для TryParse
     /// </summary>

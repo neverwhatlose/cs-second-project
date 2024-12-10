@@ -13,8 +13,8 @@ public class ShowStatistics(string name, string description, string prompt) : Ta
     /// <summary>
     /// Основной конструктор задачи
     /// </summary>
-    public ShowStatistics() : this("ShowStatistics", 
-        "Показать статистику по дням", 
+    public ShowStatistics() : this("ShowStatistics",
+        "Показать статистику по дням",
         "Сводная статистика по данным загруженного файла") { }
 
     /// <summary>
@@ -29,15 +29,15 @@ public class ShowStatistics(string name, string description, string prompt) : Ta
         {
             try
             {
-                List<WeatherRec> weatherRecs = DataParser.ParseData(data);
-                
+                var weatherRecs = DataParser.ParseData(data);
+
                 Console.WriteLine("Формирование сводной статистики...");
-                
-                int fishingDays = 0, rainyWarmDays = 0, normalAtmospherePressure = 0, WinDirCount = 0;
-                Dictionary<string, int> groups = new Dictionary<string, int>();
-                
+
+                int fishingDays = 0, rainyWarmDays = 0, normalAtmospherePressure = 0, winDirCount = 0;
+                var groups = new Dictionary<string, int>();
+
                 // Собираем статистику по дням
-                foreach (WeatherRec weatherRec in weatherRecs)
+                foreach (var weatherRec in weatherRecs)
                 {
                     if (weatherRec.WindSpeed3Pm < 13)
                     {
@@ -53,27 +53,27 @@ public class ShowStatistics(string name, string description, string prompt) : Ta
                     {
                         normalAtmospherePressure++;
                     }
-                    if (weatherRec.WindDir9Am == WorldSides.W 
+                    if (weatherRec.WindDir9Am == WorldSides.W
                         || weatherRec.WindDir3Pm == WorldSides.WSW
                         || weatherRec.WindDir3Pm == WorldSides.SW
                         || weatherRec.WindDir3Pm == WorldSides.S
                         || weatherRec.WindDir3Pm == WorldSides.SSW)
                     {
-                        WinDirCount++;
+                        winDirCount++;
                     }
                     if (!groups.TryAdd(weatherRec.Location, 1))
                     {
                         groups[weatherRec.Location]++;
                     }
                 }
-                
+
                 result = $"\nКоличество дней, когда скорость ветра в 3PM меньше 13: {fishingDays}\n" +
                          $"Количество дней, когда максимальная температура больше 20 и шел дождь: {rainyWarmDays}\n" +
                          $"Количество дней, когда атмосферное давление в 9AM было в пределах 1000-1007: {normalAtmospherePressure}\n" +
-                         $"Количество дней, когда ветер дул только на W, WSW, W, SSW, S: {WinDirCount}\n" +
+                         $"Количество дней, когда ветер дул только на W, WSW, W, SSW, S: {winDirCount}\n" +
                          "Локации и количество записей в каждой из них:";
-                
-                foreach (KeyValuePair<string, int> group in groups)
+
+                foreach (var group in groups)
                 {
                     result += $"\n{group.Key}: {group.Value}";
                 }

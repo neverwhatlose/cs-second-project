@@ -24,10 +24,10 @@ public class MainClass
         // Установка культуры по умолчанию, чтобы избежать проблем с разделителями
         CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
         CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.InvariantCulture;
-        
-        Terminal terminal = new Terminal();
+
+        var terminal = new Terminal();
         bool successfulExecution = false;
-        
+
         // Установка пути к файлу
         while (!successfulExecution)
         {
@@ -37,7 +37,7 @@ public class MainClass
         Console.ReadKey();
 
         terminal.ShowTaskList();
-        
+
         // Основной цикл программы
         while (true)
         {
@@ -45,9 +45,9 @@ public class MainClass
             if (int.TryParse(input, out int number))
             {
                 Console.Clear();
-                
+
                 terminal.SetTask((TaskListName)number).Execute();
-                
+
                 Console.WriteLine("Нажмите Enter, чтобы продолжить");
                 Console.ReadKey();
                 terminal.ShowTaskList();
