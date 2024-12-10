@@ -2,12 +2,26 @@ using Project2_1.Module;
 
 namespace Project2_1.Tasks.Core;
 
+/// <summary>
+/// Класс задачи "Показать статистику по дням"
+/// </summary>
+/// <param name="name">Техническое название задачи</param>
+/// <param name="description">Название задачи понятное пользователю</param>
+/// <param name="prompt">Описание задачи</param>
 public class ShowStatistics(string name, string description, string prompt) : Task(name, description, prompt)
 {
+    /// <summary>
+    /// Основной конструктор задачи
+    /// </summary>
     public ShowStatistics() : this("ShowStatistics", 
         "Показать статистику по дням", 
         "Сводная статистика по данным загруженного файла") { }
 
+    /// <summary>
+    /// Переопределенный метод выполнения задачи
+    /// </summary>
+    /// <param name="successfulExecution">Позволяет отслеживать успешность выполнения задачи</param>
+    /// <param name="result">Возвращаемый задачей результат</param>
     public override void Execute(ref bool successfulExecution, ref string result)
     {
         string[]? data = FileParser.ReadLines();
@@ -22,6 +36,7 @@ public class ShowStatistics(string name, string description, string prompt) : Ta
                 int fishingDays = 0, rainyWarmDays = 0, normalAtmospherePressure = 0, WinDirCount = 0;
                 Dictionary<string, int> groups = new Dictionary<string, int>();
                 
+                // Собираем статистику по дням
                 foreach (WeatherRec weatherRec in weatherRecs)
                 {
                     if (weatherRec.WindSpeed3Pm < 13)

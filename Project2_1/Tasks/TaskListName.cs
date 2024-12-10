@@ -1,6 +1,8 @@
 namespace Project2_1.Tasks;
 
-//ВАЖНО СОБЛЮДАТЬ ПОРЯДОК ЗАДАЧ В ЭТОМ ЕНАМЕ
+/// <summary>
+/// Енам для списка задач. Порядок (или ID) задач важно соблюдать.
+/// </summary>
 public enum TaskListName
 {
     SetFilePath = 1,

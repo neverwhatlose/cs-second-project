@@ -3,17 +3,29 @@ using System.Text;
 
 namespace Project2_1.Module;
 
+/// <summary>
+/// Класс для работы с файлами
+/// </summary>
 public static class FileParser
 {
+    // Путь к файлу по умолчанию
     public static readonly string DefaultInputPath = GetProjectDirectory() + $"{Path.DirectorySeparatorChar}File{Path.DirectorySeparatorChar}Input{Path.DirectorySeparatorChar}weatherAUS.csv";
+    // Путь к файлу, который указал пользователь
     public static string customInputPath { get; private set; } = DefaultInputPath;
-
-    //TODO: Check for correct file structure
+    
+    /// <summary>
+    /// Устанавливает новый путь к файлу
+    /// </summary>
+    /// <param name="path">Полный путь к файлу</param>
+    /// <param name="result">Результат установки нового пути</param>
+    /// <param name="successfulExecution">True - если удалось изменить директорию, false - в остальных случаях</param>
     public static void SetNewFilePath(string path, ref string result, ref bool successfulExecution)
     {
+        // Заменяем все слеши на текущую ОС
         path = path.Replace("/", Path.DirectorySeparatorChar.ToString()).Replace("\\", Path.DirectorySeparatorChar.ToString());
         try
         {
+            // Считываем все строки из файла
             string[]? file = File.Exists(path) ? File.ReadAllLines(path) : null;
 
             if (path == DefaultInputPath)
@@ -40,13 +52,20 @@ public static class FileParser
             successfulExecution = false;
         }
     }
-
+    
+    /// <summary>
+    /// Проверяет наличие файла в директории по умолчанию
+    /// </summary>
+    /// <returns>True - если файл существует, false - в остальных случаях</returns>
     public static bool IsDefaultPathValid()
     {
         return File.Exists(DefaultInputPath);
     }
     
-
+    /// <summary>
+    /// Читает все строки из файла
+    /// </summary>
+    /// <returns>Список считанных строк из файла</returns>
     public static string[]? ReadLines()
     {
         try
@@ -60,6 +79,13 @@ public static class FileParser
         }
     }
     
+    /// <summary>
+    /// Записывает строки в файл
+    /// </summary>
+    /// <param name="path">Путь к файлу</param>
+    /// <param name="content">Список строк для записи в файл</param>
+    /// <param name="successfulExecution">True - если удалось записать данные в файл, false - в остальных случаях</param>
+    /// <exception cref="Exception">При неудачной записи данных в файл</exception>
     public static void WriteToFile(string path, List<string> content, ref bool successfulExecution)
     {
         try
@@ -74,6 +100,10 @@ public static class FileParser
         }
     }
     
+    /// <summary>
+    /// Возвращает путь к директории проекта
+    /// </summary>
+    /// <returns>Путь к директории проекта</returns>
     public static string GetProjectDirectory()
     {
         return string.Join(" ", Directory.GetCurrentDirectory().Replace(" ",

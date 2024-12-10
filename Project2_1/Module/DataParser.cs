@@ -1,23 +1,34 @@
 namespace Project2_1.Module;
 
+/// <summary>
+/// Класс для парсинга данных
+/// </summary>
 public static class DataParser
 {
     private const int ColumnCount = 23;
 
     private const string ColumnNames =
         "Date,Location,MinTemp,MaxTemp,Rainfall,Evaporation,Sunshine,WindGustDir,WindGustSpeed,WindDir9am,WindDir3pm,WindSpeed9am,WindSpeed3pm,Humidity9am,Humidity3pm,Pressure9am,Pressure3pm,Cloud9am,Cloud3pm,Temp9am,Temp3pm,RainToday,RainTomorrow";
-
+    
+    /// <summary>
+    /// Парсит данные из массива строк
+    /// </summary>
+    /// <param name="lines">Входные данные из файла</param>
+    /// <returns>Список объектов после парсинга</returns>
+    /// <exception cref="Exception">Выбрасывается при неверном формате входных данных</exception>
     public static List<WeatherRec> ParseData(string[] lines)
     {
         if (lines.Length <= 1 || lines[0] != ColumnNames)
         {
             throw new Exception("Неверный формат данных");
         }
-
+        
+        // Удаляем первую строку с названиями столбцов
         lines = lines[1..];
 
         List<WeatherRec> weatherRecs = new();
-
+        
+        // Парсим каждую строку
         foreach (string line in lines)
         {
             if (IsLineValid(line, out WeatherRec weatherRec))
@@ -28,7 +39,13 @@ public static class DataParser
 
         return weatherRecs;
     }
-
+    
+    /// <summary>
+    /// Парсит строку к объекту WeatherRec
+    /// </summary>
+    /// <param name="line">Передаваемая строка</param>
+    /// <param name="weatherRec">Полученный объект после парсинга. Может быть null (при неудачном парсинге) или иметь свойства</param>
+    /// <returns>True - если удалось отпарсить строку, false в остальных случаях</returns>
     private static bool IsLineValid(string line, out WeatherRec weatherRec)
     {
         string[] values = line.Replace("No", "false").Replace("Yes", "true").Split(',');
@@ -69,6 +86,12 @@ public static class DataParser
         return false;
     }
     
+    /// <summary>
+    /// Расширение для TryParse
+    /// </summary>
+    /// <param name="value">Значение для парсинга</param>
+    /// <param name="result">Возвращаемое значение после парсинга</param>
+    /// <returns>True - при удачном парсинге строки, false в остальных случаях</returns>
     private static bool TryParseWithExtension(this string value, out bool result)
     {
         if (!value.Equals("NA"))
@@ -80,6 +103,12 @@ public static class DataParser
         return true;
     }
     
+    /// <summary>
+    /// Расширение для TryParse
+    /// </summary>
+    /// <param name="value">Значение для парсинга</param>
+    /// <param name="result">Возвращаемое значение после парсинга</param>
+    /// <returns>True - при удачном парсинге строки, false в остальных случаях</returns>
     private static bool TryParseWithExtension(this string value, out double result)
     {
         if (!value.Equals("NA"))
@@ -91,6 +120,12 @@ public static class DataParser
         return true;
     }
     
+    /// <summary>
+    /// Расширение для TryParse
+    /// </summary>
+    /// <param name="value">Значение для парсинга</param>
+    /// <param name="result">Возвращаемое значение после парсинга</param>
+    /// <returns>True - при удачном парсинге строки, false в остальных случаях</returns>
     private static bool TryParseWithExtension(this string value, out int result)
     {
         if (!value.Equals("NA"))

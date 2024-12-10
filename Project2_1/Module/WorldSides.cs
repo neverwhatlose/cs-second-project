@@ -1,5 +1,8 @@
 namespace Project2_1.Module;
 
+/// <summary>
+/// Енам для сторон света
+/// </summary>
 public enum WorldSides
 {
     E,
