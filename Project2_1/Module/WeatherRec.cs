@@ -87,12 +87,15 @@ public class WeatherRec
         RainTomorrow = rainTomorrow;
     }
 
+    // ))))))))))))))))))))))
+    // use expression body)) to string))))
     /// <summary>
     /// Переопределение метода ToString
     /// </summary>
     /// <returns>Строковое представление объекта WeatherRec</returns>
     public override string ToString()
     {
-        return $"{Date.ToShortDateString()},{Location},{MinTemp},{MaxTemp},{Rainfall},{Evaporation},{Sunshine},{WindGustDir},{WindGustSpeed},{WindDir9Am},{WindDir3Pm},{WindSpeed9Am},{WindSpeed3Pm},{Humidity9Am},{Humidity3Pm},{Pressure9Am},{Pressure3Pm},{Cloud9Am},{Cloud3Pm},{Temp9Am},{Temp3Pm},{RainToday},{RainTomorrow}".Replace("True", "Yes").Replace("False", "No");
+        string result = $"{Date.ToShortDateString()},{Location},{MinTemp},{MaxTemp},{Rainfall},{Evaporation},{Sunshine},{WindGustDir},{WindGustSpeed},{WindDir9Am},{WindDir3Pm},{WindSpeed9Am},{WindSpeed3Pm},{Humidity9Am},{Humidity3Pm},{Pressure9Am},{Pressure3Pm},{Cloud9Am},{Cloud3Pm},{Temp9Am},{Temp3Pm},{RainToday},{RainTomorrow}".Replace("True", "Yes").Replace("False", "No");
+        return result;
     }
 }

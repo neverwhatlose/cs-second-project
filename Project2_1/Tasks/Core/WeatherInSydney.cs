@@ -11,12 +11,12 @@ namespace Project2_1.Tasks.Core;
 public class WeatherInSydney(string name, string description, string prompt) : Task(name, description, prompt)
 {
     /// <summary>
-    /// Основной конструктор задачи 
+    /// Основной конструктор задачи
     /// </summary>
-    public WeatherInSydney() : this("WeatherInSydney", 
-        "Показать погоду в Сиднее", 
+    public WeatherInSydney() : this("WeatherInSydney",
+        "Показать погоду в Сиднее",
         "Информация о погоде, собранной в Сиднее (Location = Sydney) за 2009 и 2010 год.") { }
-    
+
     /// <summary>
     /// Переопределенный метод выполнения задачи
     /// </summary>
@@ -29,13 +29,13 @@ public class WeatherInSydney(string name, string description, string prompt) : T
         {
             try
             {
-                List<WeatherRec> weatherRecs = DataParser.ParseData(data);
-                
+                var weatherRecs = DataParser.ParseData(data);
+
                 Console.WriteLine("Получение данных о погоде в Сиднее...\n");
-                
+
                 List<string> weatherRecsStr = new();
                 weatherRecsStr.Add("Date,Location,MinTemp,MaxTemp,Rainfall,Evaporation,Sunshine,WindGustDir,WindGustSpeed,WindDir9am,WindDir3pm,WindSpeed9am,WindSpeed3pm,Humidity9am,Humidity3pm,Pressure9am,Pressure3pm,Cloud9am,Cloud3pm,Temp9am,Temp3pm,RainToday,RainTomorrow");
-                foreach (WeatherRec weatherRec in weatherRecs)
+                foreach (var weatherRec in weatherRecs)
                 {
                     if (weatherRec.Location == "Sydney" &&
                         (weatherRec.Date.Year == 2009 || weatherRec.Date.Year == 2010))
@@ -43,10 +43,10 @@ public class WeatherInSydney(string name, string description, string prompt) : T
                         weatherRecsStr.Add(weatherRec.ToString());
                     }
                 }
-                
-                string outputDir = $"{FileParser.GetProjectDirectory()}{Path.DirectorySeparatorChar}File{Path.DirectorySeparatorChar}Output{Path.DirectorySeparatorChar}Sydney_2009_2010_weatherAUS.csv";
+
+                string outputDir = $"{FileParser.ProjectDirectory}{Path.DirectorySeparatorChar}File{Path.DirectorySeparatorChar}Output{Path.DirectorySeparatorChar}Sydney_2009_2010_weatherAUS.csv";
                 FileParser.WriteToFile(outputDir, weatherRecsStr, ref successfulExecution);
-                
+
                 result = $"Найдено {weatherRecsStr.Count - 1} записей о погоде в Сиднее за 2009 и 2010 годы. " +
                          $"Результат записан в файл {outputDir}";
             }

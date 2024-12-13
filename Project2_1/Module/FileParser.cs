@@ -8,10 +8,16 @@ namespace Project2_1.Module;
 /// </summary>
 public static class FileParser
 {
+    // Путь к папке проекта
+    public static readonly string ProjectDirectory = string.Join(" ", Directory.GetCurrentDirectory().Replace(" ",
+                "РАЗДЕЛИТЕЛЬ,ИСПОЛЬЗУЕМЫЙ_ДЛЯ_КОРРЕКТНОГО_ПОИСКА_ФАЙЛА_ДАЖЕ_С_УЧЕТОМ_ПРОБЕЛОВ_В_НАЗВАНИИ_ПАПКИ")
+                .Split(Path.DirectorySeparatorChar)[..^3])
+                .Replace(" ", Path.DirectorySeparatorChar.ToString()).Replace(
+                "РАЗДЕЛИТЕЛЬ,ИСПОЛЬЗУЕМЫЙ_ДЛЯ_КОРРЕКТНОГО_ПОИСКА_ФАЙЛА_ДАЖЕ_С_УЧЕТОМ_ПРОБЕЛОВ_В_НАЗВАНИИ_ПАПКИ", " ");
     // Путь к файлу по умолчанию
-    public static readonly string DefaultInputPath = GetProjectDirectory() + $"{Path.DirectorySeparatorChar}File{Path.DirectorySeparatorChar}Input{Path.DirectorySeparatorChar}weatherAUS.csv";
+    public static readonly string DefaultInputPath = ProjectDirectory + $"{Path.DirectorySeparatorChar}File{Path.DirectorySeparatorChar}Input{Path.DirectorySeparatorChar}weatherAUS.csv";
     // Путь к файлу, который указал пользователь
-    public static string CustomInputPath { get; private set; } = DefaultInputPath;
+    private static string CustomInputPath { get; set; } = DefaultInputPath;
 
     /// <summary>
     /// Устанавливает новый путь к файлу
@@ -53,16 +59,6 @@ public static class FileParser
         }
     }
 
-    // Я не знаю, почему код стайл ругается на этот метод, но он нужен чисто для этого))
-    /// <summary>
-    /// Проверяет наличие файла в директории по умолчанию
-    /// </summary>
-    /// <returns>True - если файл существует, false - в остальных случаях</returns>
-    public static bool IsDefaultPathValid()
-    {
-        return File.Exists(DefaultInputPath);
-    }
-
     /// <summary>
     /// Читает все строки из файла
     /// </summary>
@@ -99,19 +95,5 @@ public static class FileParser
             successfulExecution = false;
             throw new Exception("Возникла ошибка при записи в файл: " + ex.Message);
         }
-    }
-
-    // Я не знаю, почему код стайл ругается на этот метод, но он нужен чисто для этого))
-    /// <summary>
-    /// Возвращает путь к директории проекта
-    /// </summary>
-    /// <returns>Путь к директории проекта</returns>
-    public static string GetProjectDirectory()
-    {
-        return string.Join(" ", Directory.GetCurrentDirectory().Replace(" ",
-                    "РАЗДЕЛИТЕЛЬ,ИСПОЛЬЗУЕМЫЙ_ДЛЯ_КОРРЕКТНОГО_ПОИСКА_ФАЙЛА_ДАЖЕ_С_УЧЕТОМ_ПРОБЕЛОВ_В_НАЗВАНИИ_ПАПКИ")
-                .Split(Path.DirectorySeparatorChar)[..^3])
-                .Replace(" ", Path.DirectorySeparatorChar.ToString()).Replace(
-                "РАЗДЕЛИТЕЛЬ,ИСПОЛЬЗУЕМЫЙ_ДЛЯ_КОРРЕКТНОГО_ПОИСКА_ФАЙЛА_ДАЖЕ_С_УЧЕТОМ_ПРОБЕЛОВ_В_НАЗВАНИИ_ПАПКИ", " ");
     }
 }

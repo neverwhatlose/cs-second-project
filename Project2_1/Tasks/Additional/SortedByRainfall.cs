@@ -16,7 +16,7 @@ public class SortedByRainfall(string name, string description, string prompt) : 
     public SortedByRainfall() : this("SortedByRainfall",
         "Сортировка по количеству осадков",
         "Сохраняет данные о количестве осадков за каждый день в убывающем порядке по группам") { }
-    
+
     /// <summary>
     /// Переопределенный метод выполнения задачи
     /// </summary>
@@ -28,34 +28,34 @@ public class SortedByRainfall(string name, string description, string prompt) : 
         if (data is not null)
         {
             Dictionary<string, List<WeatherRec>> groups = new();
-            
+
             try
             {
                 // Парсинг данных
-                List<WeatherRec> weatherRecs = DataParser.ParseData(data);
-                
+                var weatherRecs = DataParser.ParseData(data);
+
                 Console.WriteLine("Формирую результат запроса...\n");
-                
+
                 // Группировка данных по локациям
-                foreach (WeatherRec weatherRec in weatherRecs)
+                foreach (var weatherRec in weatherRecs)
                 {
                     if (!groups.TryAdd(weatherRec.Location, new List<WeatherRec> { weatherRec }))
                     {
                         groups[weatherRec.Location].Add(weatherRec);
                     }
                 }
-                
+
                 // Формирование результата
-                foreach (KeyValuePair<string, List<WeatherRec>> group in groups)
+                foreach (var group in groups)
                 {
                     result += $"Локация: {group.Key}\n"
                               + $"Среднее количество осадков: {GetAverageRainfall(group.Value)}\n";
                 }
-                
-                string outputDir = $"{FileParser.GetProjectDirectory()}{Path.DirectorySeparatorChar}File{Path.DirectorySeparatorChar}Output{Path.DirectorySeparatorChar}average_rain_weatherAUS.csv";
-                
+
+                string outputDir = $"{FileParser.ProjectDirectory}{Path.DirectorySeparatorChar}File{Path.DirectorySeparatorChar}Output{Path.DirectorySeparatorChar}average_rain_weatherAUS.csv";
+
                 SortByRainfall(ref groups);
-            
+
                 Console.WriteLine($"Отсортированные данные загружены в {outputDir}");
                 FileParser.WriteToFile(outputDir, ListsToList(groups), ref successfulExecution);
             }
@@ -69,7 +69,7 @@ public class SortedByRainfall(string name, string description, string prompt) : 
         {
             result = "Ошибка при чтении файла!";
         }
-        
+
     }
 
     /// <summary>
@@ -80,7 +80,7 @@ public class SortedByRainfall(string name, string description, string prompt) : 
     private double GetAverageRainfall(List<WeatherRec> weatherRecs)
     {
         double sum = 0;
-        foreach (WeatherRec weatherRec in weatherRecs)
+        foreach (var weatherRec in weatherRecs)
         {
             sum += weatherRec.Rainfall;
         }
@@ -94,12 +94,12 @@ public class SortedByRainfall(string name, string description, string prompt) : 
     /// <param name="groups">Список данных для сортировки по убыванию</param>
     private void SortByRainfall(ref Dictionary<string, List<WeatherRec>> groups)
     {
-        foreach (KeyValuePair<string, List<WeatherRec>> group in groups)
+        foreach (var group in groups)
         {
             group.Value.Sort((a, b) => b.Rainfall.CompareTo(a.Rainfall));
         }
     }
-    
+
     /// <summary>
     /// Преобразование списка списков в список строк
     /// </summary>
@@ -108,9 +108,9 @@ public class SortedByRainfall(string name, string description, string prompt) : 
     private List<string> ListsToList(Dictionary<string, List<WeatherRec>> groups)
     {
         List<string> result = new();
-        foreach (KeyValuePair<string, List<WeatherRec>> group in groups)
+        foreach (var group in groups)
         {
-            foreach (WeatherRec weatherRec in group.Value)
+            foreach (var weatherRec in group.Value)
             {
                 result.Add(weatherRec.ToString());
             }

@@ -29,15 +29,7 @@ public class SetFilePath(string name, string description, string prompt) : Task(
         {
             Console.WriteLine("Чтение входного файла...");
             
-            if (FileParser.IsDefaultPathValid())
-            {
-                FileParser.SetNewFilePath(FileParser.DefaultInputPath, ref result, ref successfulExecution);
-            }
-            else
-            {
-                result = "Файл не найден!";
-                successfulExecution = false;
-            }
+            FileParser.SetNewFilePath(FileParser.DefaultInputPath, ref result, ref successfulExecution);
         }
         else
         {

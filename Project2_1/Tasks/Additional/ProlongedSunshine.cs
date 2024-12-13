@@ -35,7 +35,7 @@ public class ProlongedSunshine(string name, string description, string prompt) :
 
                 Console.WriteLine("Подсчет дней с продолжительным солнечным светом...\n" +
                                   "Куда сохранить результат? (введите полный путь к файлу или нажмите Enter для сохранения в " +
-                                  $"{FileParser.GetProjectDirectory()}{Path.DirectorySeparatorChar}File{Path.DirectorySeparatorChar}Output{Path.DirectorySeparatorChar}sunshine_days.csv)");
+                                  $"{FileParser.ProjectDirectory}{Path.DirectorySeparatorChar}File{Path.DirectorySeparatorChar}Output{Path.DirectorySeparatorChar}sunshine_days.csv)");
 
                 var longestSunshine = weatherRecs[0];
                 List<string> sunshineDays = new();
@@ -66,7 +66,7 @@ public class ProlongedSunshine(string name, string description, string prompt) :
                 {
                     if (outputDir is null || outputDir == "")
                     {
-                        outputDir = $"{FileParser.GetProjectDirectory()}{Path.DirectorySeparatorChar}File{Path.DirectorySeparatorChar}Output{Path.DirectorySeparatorChar}sunshine_days.csv";
+                        outputDir = $"{FileParser.ProjectDirectory}{Path.DirectorySeparatorChar}File{Path.DirectorySeparatorChar}Output{Path.DirectorySeparatorChar}sunshine_days.csv";
                     }
                     result +=  $"Результат записан в файл {outputDir}";
 
