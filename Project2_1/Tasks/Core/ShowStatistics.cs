@@ -33,7 +33,7 @@ public class ShowStatistics(string name, string description, string prompt) : Ta
 
                 Console.WriteLine("Формирование сводной статистики...");
 
-                int fishingDays = 0, rainyWarmDays = 0, normalAtmospherePressure = 0, winDirCount = 0;
+                HashSet<DateTime> fishingDays = new(), rainyWarmDays = new(), normalAtmospherePressure = new(), winDirCount = new();
                 var groups = new Dictionary<string, int>();
 
                 // Собираем статистику по дням
@@ -41,17 +41,17 @@ public class ShowStatistics(string name, string description, string prompt) : Ta
                 {
                     if (weatherRec.WindSpeed3Pm < 13)
                     {
-                        fishingDays++;
+                        fishingDays.Add(weatherRec.Date);
                     }
 
                     if (weatherRec.MaxTemp >= 20 && weatherRec.RainToday)
                     {
-                        rainyWarmDays++;
+                        rainyWarmDays.Add(weatherRec.Date);
                     }
 
                     if (1000 <= weatherRec.Pressure9Am && weatherRec.Pressure9Am <= 1007)
                     {
-                        normalAtmospherePressure++;
+                        normalAtmospherePressure.Add(weatherRec.Date);
                     }
                     if (weatherRec.WindDir9Am == WorldSides.W
                         || weatherRec.WindDir3Pm == WorldSides.WSW
@@ -59,7 +59,7 @@ public class ShowStatistics(string name, string description, string prompt) : Ta
                         || weatherRec.WindDir3Pm == WorldSides.S
                         || weatherRec.WindDir3Pm == WorldSides.SSW)
                     {
-                        winDirCount++;
+                        winDirCount.Add(weatherRec.Date);
                     }
                     if (!groups.TryAdd(weatherRec.Location, 1))
                     {
@@ -67,10 +67,10 @@ public class ShowStatistics(string name, string description, string prompt) : Ta
                     }
                 }
 
-                result = $"\nКоличество дней, когда скорость ветра в 3PM меньше 13: {fishingDays}\n" +
-                         $"Количество дней, когда максимальная температура больше 20 и шел дождь: {rainyWarmDays}\n" +
-                         $"Количество дней, когда атмосферное давление в 9AM было в пределах 1000-1007: {normalAtmospherePressure}\n" +
-                         $"Количество дней, когда ветер дул только на W, WSW, W, SSW, S: {winDirCount}\n" +
+                result = $"\nКоличество дней, когда скорость ветра в 3PM меньше 13: {fishingDays.Count}\n" +
+                         $"Количество дней, когда максимальная температура больше 20 и шел дождь: {rainyWarmDays.Count}\n" +
+                         $"Количество дней, когда атмосферное давление в 9AM было в пределах 1000-1007: {normalAtmospherePressure.Count}\n" +
+                         $"Количество дней, когда ветер дул только на W, WSW, W, SSW, S: {winDirCount.Count}\n" +
                          "Локации и количество записей в каждой из них:";
 
                 foreach (var group in groups)

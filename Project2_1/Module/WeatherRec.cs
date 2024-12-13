@@ -88,7 +88,7 @@ public class WeatherRec
     }
 
     // ))))))))))))))))))))))
-    // use expression body)) to string))))
+    // use expression body)) toString))))
     /// <summary>
     /// Переопределение метода ToString
     /// </summary>
